@@ -26,6 +26,40 @@ SECRET_KEY = "django-insecure-(jskeq*8kvzw6iv3@l9mfr0$omvrvz2xwh7dpmu8ufz&fhbnh%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+    SECRET_KEY = "nnbjh58y3vj!i&8fddcl$2$39e+l63%qq0^$5yx2hi729+ynyr"
+
+    ALLOWED_HOSTS = ["*"]
+
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+else:
+    ALLOWED_HOSTS = [
+        "cracalculator.com.au",
+        "www.cracalculator.com.au",
+        "localhost:8000",
+        "cra-testing.azurewebsites.net",
+        "www.cra-testing.azurewebsites.net",
+        "https://cra-testing.azurewebsites.net"
+    ]
+    SECRET_KEY = os.environ["SECRET_KEY"]
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ["DBNAME"],
+            "HOST": os.environ["DBHOST"] + ".postgres.database.azure.com",
+            "USER": os.environ["DBUSER"] + "@" + os.environ["DBHOST"],
+            "PASSWORD": os.environ["DBPASS"],
+        }
+    }
+
 ALLOWED_HOSTS = []
 
 
@@ -77,12 +111,7 @@ WSGI_APPLICATION = "OCR.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+
 
 
 # Password validation
