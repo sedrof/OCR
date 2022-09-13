@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-(jskeq*8kvzw6iv3@l9mfr0$omvrvz2xwh7dpmu8ufz&fhbnh%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -45,12 +45,8 @@ if DEBUG:
 
 else:
     ALLOWED_HOSTS = [
-        "cracalculator.com.au",
-        "www.cracalculator.com.au",
-        "localhost:8000",
-        "cra-testing.azurewebsites.net",
-        "www.cra-testing.azurewebsites.net",
-        "https://cra-testing.azurewebsites.net"
+        "ocr-testing.azurewebsites.net",
+        "https://ocr-testing.azurewebsites.net"
     ]
     SECRET_KEY = os.environ["SECRET_KEY"]
     DATABASES = {
