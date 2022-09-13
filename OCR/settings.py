@@ -31,7 +31,10 @@ if DEBUG:
 
     SECRET_KEY = "nnbjh58y3vj!i&8fddcl$2$39e+l63%qq0^$5yx2hi729+ynyr"
 
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = [
+        "ocr-testing.azurewebsites.net",
+        "https://ocr-testing.azurewebsites.net",
+        ]
 
     DATABASES = {
     "default": {
