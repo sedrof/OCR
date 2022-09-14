@@ -59,7 +59,6 @@ else:
         }
     }
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
