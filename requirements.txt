@@ -1,8 +1,8 @@
 
-Django==4.1.1
-django-nested-admin==3.4.0
-ocrmypdf==13.7.0
-pdfplumber==0.7.4
+Django==3.0.8
+django-nested-admin==3.3.3
+ocrmypdf
+pdfplumber
 psycopg2-binary==2.9.3
-pytesseract==0.3.10
-
+django-dotenv==1.4.2
+gunicorn==20.1.0
