@@ -24,17 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    ALLOWED_HOSTS = ["*"]
 
     SECRET_KEY = "nnbjh58y3vj!i&8fddcl$2$39e+l63%qq0^$5yx2hi729+ynyr"
-
-    ALLOWED_HOSTS = [
-        "ocr-testing.azurewebsites.net",
-        "https://ocr-testing.azurewebsites.net",
-        ]
 
     DATABASES = {
     "default": {
@@ -44,18 +40,15 @@ if DEBUG:
 }
 
 else:
-    ALLOWED_HOSTS = [
-        "ocr-testing.azurewebsites.net",
-        "https://ocr-testing.azurewebsites.net"
-    ]
-    SECRET_KEY = os.environ["SECRET_KEY"]
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = "asdasdase234234werfdsf"
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ["DBNAME"],
-            "HOST": os.environ["DBHOST"] + ".postgres.database.azure.com",
-            "USER": os.environ["DBUSER"] + "@" + os.environ["DBHOST"],
-            "PASSWORD": os.environ["DBPASS"],
+            "NAME": "easyocr",
+            "HOST": "cra-calculator-db" + ".postgres.database.azure.com",
+            "USER": "CraCalcAdmin" + "@" + "cra-calculator-db" + ".postgres.database.azure.com",
+            "PASSWORD": "JnzTz@iu",
         }
     }
 
@@ -151,6 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
