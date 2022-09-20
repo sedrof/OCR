@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{%block title%}Invoice List {%endblock%}
+
+{% block breadcrumb %}
+
+   <li class="breadcrumb-item "><a href="{% url 'home' %}">home</a></li>
+        <li class="breadcrumb-item active">Invoice List</li>
+{%endblock%}
+
+{% block content %}
+<div style='margin-left:10px;display:flex' style=''>
+            <div style="width:50%" class="input-group">
+        <form>
+                <input  name="q" type="text" placeholder="Search" class="form-control form-control-lg" />
+                <div style='padding:4px' class="input-group-append">
+                    <button style='background-color:grey; ' class="btn btn-primary btn-lg">Search</button>
+                </div>
+        </form> 
+            </div>
+        <div style='justify-content:flex-end'>
+        <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class='custom-btn' href="{% url 'home' %}" style="width:100%; margin-top:10%;" type="submit"
+                    class="btn btn-primary btn-lg-5">Upload</button>
+            </form>
+            </div>
+</div>
+
+    <div class="col-lg-12">
+      {% include "partials/messages.html"%}
+    </div>
+<div class="row">
+
+<div class='tables' style='margin:30px;height:25vw;width:80vw; border:1px solid black;border-right:1px solid black;'>    
+<table class="ui red table" style=''>
+    <thead>
+      <tr>
+        <th >Ref</th>
+        <th >invoice date</th>
+        <th >total_invoice_amount</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for invoice in page.object_list %}
+
+      <tr >
+        <td>
+        {% if invoice.get_absolute_url %}<small><a href='{{ invoice.get_absolute_url }}'>{{invoice.inv_ref}}</a></small>{% endif %}</h1>
+            
+        </td>
+        <td>{{ invoice.invoice_date }}</td>
+        <td>{{ invoice.total_invoice_amount }}</td>
+        <td >
+            <div class="col-md-2">
+      <a
+        href="{% url 'invoices:invoice-delete' invoice.id %}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </div>
+    </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <div class="page-links" style ="position:absolute;">
+    <div class="ui borderless menu" style="height: 50px;">
+       
+    {% if page.has_previous %}
+    <a style="margin-right: 5%; background-color:#1e6de3; color: white;"class="item" href="{% url 'all_cards' %}?page=1"> First <br> <i class="angle double left icon"></i> </a>
+    <a style=" margin-right: 5%; background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ page.previous_page_number }}"> Previous<i class="angle left icon"></i> </a>
+    {% endif %}
+    {% if page.has_next %}
+    <a style=" margin-right: 5%; background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ page.next_page_number }}"> Next<i class="angle right icon"></i> </a>
+    <a style="background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ num_pages }}"> Last <i class="angle double right icon"></i> </a>
+    {% endif %}
+    </div>
+  </div>
+
+  <div class="page-links" style ="position:absolute;">
+    <div class="ui borderless menu" style="height: 50px;">
+       
+    {% if page.has_previous %}
+    <a style="margin-right: 5%; background-color:#1e6de3; color: white;"class="item" href="{% url 'all_cards' %}?page=1"> First <br> <i class="angle double left icon"></i> </a>
+    <a style=" margin-right: 5%; background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ page.previous_page_number }}"> Previous<i class="angle left icon"></i> </a>
+    {% endif %}
+    {% if page.has_next %}
+    <a style=" margin-right: 5%; background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ page.next_page_number }}"> Next<i class="angle right icon"></i> </a>
+    <a style="background-color:#1e6de3; color: white;" class="item" href="{% url 'all_cards' %}?page={{ num_pages }}"> Last <i class="angle double right icon"></i> </a>
+    {% endif %}
+    </div>
+  </div>
+
+  
+
+</div>
+
+{% endblock %}

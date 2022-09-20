@@ -63,10 +63,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 'widget_tweaks',
+    "django_htmx",
     "nested_admin",
-    "pdf",
+    "pdf_gen",
     "api"
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,6 +80,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "OCR.urls"
@@ -83,7 +88,7 @@ ROOT_URLCONF = "OCR.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR,'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -144,8 +149,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

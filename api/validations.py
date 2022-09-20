@@ -1,7 +1,5 @@
 import datetime
 
-
-
 def validate_time(value):
     try:
         new_date = datetime.datetime.strptime(value, "%d/%m/%Y").strftime("%Y-%m-%d")

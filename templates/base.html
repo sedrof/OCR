@@ -1,0 +1,85 @@
+{% load static%}
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+  <link
+    href="http://fonts.cdnfonts.com/css/euclid-circular-a?styles=100037,100034,100036,100039,100031"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+  />
+  <script src="/static/error.js"></script>
+  <link
+    rel="shortcut icon"
+    href="/static/assets/icons/TEXT.svg"
+    type="image/x-icon"
+  />
+</head>
+
+<body class="bg-slate-50" style="font-family: 'Euclid Circular A', sans-serif">
+  {% block body %}
+  <header class="text-gray-600 body-font">
+    <div
+      class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center"
+    >
+      <a
+        href="{% url 'home' %}"
+        class="title-font font-medium  text-gray-900 md:mb-0 inset-x-px"
+      >
+        <span class="ml-3 text-xl">OCR <i class="fi fi-rr-text"></i></span>
+      </a>
+      <nav
+        class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center"
+      >
+        <a
+          href="{% url 'invoices:list' %}"
+          class="mr-5 cursor-pointer hover:text-gray-900"
+          ><i class="fi fi-rr-home"></i> Invoices</a
+        >
+        {% comment %} <a
+          href="https://www.facebook.com/sachhit.yadav"
+          target="_blank"
+          class="mr-5 cursor-pointer hover:text-gray-900"
+          ><i class="fi fi-rr-user"></i> Profile</a
+        > {% endcomment %}
+      </nav>
+      <a href="/logout/" target="_blank">
+        <button
+          class="inline-flex items-center py-1 px-3 rounded text-base mt-4 md:mt-0 bg-gray-100 duration-300 hover:shadow-lg"
+        >
+          LOGOUT
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-4 h-4 ml-1"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+    </div>
+  </header>
+
+  <div class="container" style='width:100%'>
+    <ol style='color:grey' class="breadcrumb my-4">
+      {% block breadcrumb %} {% endblock %}
+    </ol>
+
+    {% block content %} {% endblock %}
+  </div>
+  {% endblock body %}
+  <script src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+  <script src="{%static 'js/popper.min.js'%}"></script>
+  <script src="{%static 'js/bootstrap.min.js'%}"></script>
+</body>

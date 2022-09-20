@@ -1,0 +1,52 @@
+<div style="display: flex; justify-content:flex-end">
+ <div style="margin-top: 30px; flex: 2">
+ <div class="col-md-2">
+      <a
+        href="{% url 'invoices:invoice-delete' object.id %}"
+        class="btn btn-danger btn-sm"
+        >Delete</a
+      >
+    </div>
+<form action='.' method="POST" hx-post='.' hx-swap='outerHTML'>
+    {% csrf_token %}
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    <h3>Invoice</h3>
+   {% for field in form %}
+   
+   <div class='{% if field.field.required %}{{ form.required_css_class }}{%endif%}'>
+    {{ field.errors }}   
+    {{ field.label_tag }} {{ field }}
+    {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+    </div>
+   {% endfor %}
+
+    {% comment %} {% if formset %} {% endcomment %}
+    <h3>Meters</h3>
+    {{ formset.management_form }}
+    <div style ='display:grid' id='ingredient-form-list'>
+        {% for form in formset %}
+                <div style='' class='ingredient-form'>
+                    {{ form.as_p }}
+                </div>
+        {% endfor %}
+    </div>
+
+    <div id='empty-form' class='hidden'>{{ formset.empty_form.as_p }}</div>
+    <button class='custom-btn' id='add-more' type='button'>Add more</button>
+    {% comment %} {% endif %} {% endcomment %}
+    <button class='custom-btn' style='margin-top:10px;' type='submit' >Save</button>
+</form>
+</div>
+
+<div class="pdf" style="width:50%%; position:fixed; height:100vw ">
+    <h2 style="text-align: center; widht:30%">PDF: {{object.inv_ref}} :</h2>
+
+  <embed src='http://localhost:8000/media/{{object.pdf.pdfs}}' width="750px" height="35%" 
+ type="application/pdf">
+  </div>
+
+</div>

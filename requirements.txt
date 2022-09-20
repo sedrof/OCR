@@ -46,3 +46,5 @@ pdf2image==1.16.0
 ocrmypdf
 pdfplumber
 django-nested-admin==3.4.0
+django-widget-tweaks==1.4.12
+django-htmx==1.12.2
