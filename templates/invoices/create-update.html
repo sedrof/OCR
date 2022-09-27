@@ -1,13 +1,6 @@
 {% extends "base.html" %} 
 
-<style>
-  .ingredient-form {
-    border-bottom: 1px solid black;
-  }
-  .hidden {
-    display: none;
-  }
-</style>
+
 {% block breadcrumb %}
 
    <li class="breadcrumb-item "><a href="{% url 'home' %}">home</a></li>
@@ -15,19 +8,37 @@
         <li class="breadcrumb-item active">Invoice Detail</li>
 {%endblock%}
 {% block content %}
+<style>
+  .ingredient-form {
+    border-bottom: 1px solid black;
+  }
+  .hidden {
+    display: none;
+  }
+  .errorlist {
+    color:red;
+    size:1rem;
+    transform:translateX(-30px)
+  }
+
+</style>
 
  {% include 'partials/form-htmx.html' %}
   
-<script>
+ <script>
   const addMoreBtn = document.getElementById("add-more");
   const totalNewForms = document.getElementById("id_form-TOTAL_FORMS");
   const delBtn = document.getElementById("delete-btn");
   addMoreBtn.addEventListener("click", add_new_form);
+  const saveButton = document.getElementById("save-here")
+  saveButton.addEventListener("click", hide);
+
   function add_new_form(event) {
     console.log("clicked");
     if (event) {
       event.preventDefault();
     }
+
     const currentIngredientForms =
       document.getElementsByClassName("ingredient-form");
     const currentFormCount = currentIngredientForms.length; // + 1
@@ -42,10 +53,25 @@
       regex,
       currentFormCount
     );
+    console.log(copyEmptyFormEl, ' opy')
     totalNewForms.setAttribute("value", currentFormCount + 1);
     // now add new empty form element to our html form
     formCopyTarget.append(copyEmptyFormEl);
   }
-</script>
+
+  {% comment %} setTimeout( {% endcomment %}
+  async function hide(event) {
+    if (event) {
+      event.preventDefault
+    }
+    const modal = document.getElementById("error-modal");
+    // hide modal after 3 seconds
+    console.log('start timer');
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(' 2 waiting')
+    modal.style.display = "none";
+}
+{% comment %} , 2800); {% endcomment %}
+</script> 
 
 {% endblock content %}

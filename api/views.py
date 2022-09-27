@@ -70,9 +70,11 @@ def invoice_update_view(request, id=None):
         parent = form.save(commit=False)
         parent.save()
         for form in formset:
+            print(form)
             child = form.save(commit=False)
             child.invoice = parent
             child.save()
+        context['message'] = 'Data Saved!'
 
     if request.htmx:
         return render(request, "partials/form-htmx.html", context)

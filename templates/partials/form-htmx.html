@@ -1,5 +1,27 @@
 <div style="display: flex; justify-content:flex-end">
  <div style="margin-top: 30px; flex: 2">
+
+<form action='.' method="POST" hx-post='.' hx-swap='outerHTML'>
+<!-- error popup modal -->
+        {% comment %} <div id="error-modal" class="flex animate-pulse w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg
+       fixed left-8 top-8">
+            <div class="flex items-center justify-center w-12 stroke-slate-900">
+                <svg class="w-6 h-6 text-slate-800 fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z" />
+                </svg>
+            </div>
+
+            <div class="px-4 py-2 -mx-3">
+                <div class="mx-3">
+                    <span class="font-semibold text-slate-800 "></span>
+                    <p class="text-sm text-gray-600 ">{{message}}</p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+        <!-- error popup modal -->
+
  <div class="col-md-2">
       <a
         href="{% url 'invoices:invoice-delete' object.id %}"
@@ -7,7 +29,6 @@
         >Delete</a
       >
     </div>
-<form action='.' method="POST" hx-post='.' hx-swap='outerHTML'>
     {% csrf_token %}
     {% if message %}
     <p>{{ message }}</p>
@@ -24,7 +45,7 @@
     </div>
    {% endfor %}
 
-    {% comment %} {% if formset %} {% endcomment %}
+    {% if formset %}
     <h3>Meters</h3>
     {{ formset.management_form }}
     <div style ='display:grid' id='ingredient-form-list'>
@@ -37,16 +58,15 @@
 
     <div id='empty-form' class='hidden'>{{ formset.empty_form.as_p }}</div>
     <button class='custom-btn' id='add-more' type='button'>Add more</button>
-    {% comment %} {% endif %} {% endcomment %}
+    {% endif %}
     <button class='custom-btn' style='margin-top:10px;' type='submit' >Save</button>
 </form>
 </div>
 
 <div class="pdf" style="width:50%%; position:fixed; height:100vw ">
     <h2 style="text-align: center; widht:30%">PDF: {{object.inv_ref}} :</h2>
-
   <embed src='http://localhost:8000/media/{{object.pdf.pdfs}}' width="750px" height="35%" 
  type="application/pdf">
-  </div>
+</div>
 
 </div>

@@ -22,10 +22,10 @@ class InvoiceEditForm(forms.ModelForm):
 
 
 class MeterEditForm(forms.ModelForm):
-    meter_no = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:10%;"}))
-    meter_type = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:10%;"}))
-    acc_description = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:10%;"}))
-    this_reading = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control", "style":"width:10%;"}))
+    meter_no = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:30%;"}))
+    meter_type = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:30%;"}))
+    acc_description = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "style":"width:30%;"}))
+    this_reading = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control", "style":"width:30%;"}))
     class Meta:
         model = Meter
         fields = ("meter_no", "meter_type", "acc_description", "this_reading")

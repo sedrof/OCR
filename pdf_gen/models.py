@@ -13,7 +13,7 @@ class File(models.Model):
     # validator checks file is pdf when form submitted
     pdfs = models.FileField(
         upload_to=set_pdf_file_name, 
-        validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
+        # validators=[FileExtensionValidator(allowed_extensions=['pdf'])]
         )
 
 
